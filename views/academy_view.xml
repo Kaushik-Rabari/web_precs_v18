@@ -1,0 +1,73 @@
+<odoo>
+    <!-- search view -->
+    <record id="teacher_school_search_view" model="ir.ui.view">
+        <field name="name">teacher.school.search.view</field>
+        <field name="model">teacher.school</field>
+        <field name="arch" type="xml">
+            <search string="Search Teacher">
+                <field name="teacher_name"/>
+                <field name="teacher_mobile"/>
+                <field name="teacher_address"/>
+                <field name="teacher_email"/>
+                <field name="teacher_gender"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- list view -->
+    <record id="teacher_school_list_view" model="ir.ui.view">
+        <field name="name">teacher.school.list.view</field>
+        <field name="model">teacher.school</field>
+        <field name="arch" type="xml">
+            <list string="teacher School">
+                <field name="teacher_name"/>
+                <field name="teacher_mobile"/>
+                <field name="teacher_address"/>
+                <field name="teacher_email"/>
+                <field name="teacher_gender"/>
+            </list>
+        </field>
+    </record>
+    
+    <!-- form view -->
+    <record id="teacher_school_form_view" model="ir.ui.view">
+        <field name="name">teacher.school.form.view</field>
+        <field name="model">teacher.school</field>
+        <field name="arch" type="xml">
+            <form string="teacher School">
+                <sheet>
+                    <field name="teacher_photo" widget="image" class = "oe_avatar"/>
+                    <!-- <field name="image_1920" widget="image" class = "oe_avatar"/> -->
+                    <group string="Basic Information">
+                        <field name="teacher_name"/>
+                        <field name="teacher_mobile"/>
+                        <field name="teacher_gender"/>
+                        <field name="teacher_email"/>
+                        <field name="teacher_address"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- action -->
+    <record id="action_teacher_school" model="ir.actions.act_window">
+        <field name="name">teacher School</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">teacher.school</field>
+        <field name="view_mode">list,form,kanban</field>
+        <field name="search_view_id" ref="teacher_school_search_view"/>
+        <field name="context">{}</field>
+        <field name="domain">[]</field>
+    </record>
+
+
+    <menuitem id="main_school" name="School Management" sequence="10">
+        <menuitem id="teacher_menu"
+            action="action_teacher_school"
+            name='Teachers'
+            sequence="2"/>
+
+    </menuitem>
+
+</odoo>
