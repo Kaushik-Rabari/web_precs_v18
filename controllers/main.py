@@ -19,6 +19,22 @@ class Main_Controller(http.Controller):
     #         "teacher" : teacher_name    
     #     }) 
     
+    @http.route('/teacher/<name>/', auth='public', website=True)
+    def teacher(self, name):
+        return '<h1>{}</h1>'.format(name)
+        # return http.request.render('website_v18.teacher_data', {})
+    
+    @http.route('/teacher/<int:id>/', auth='public', website=True)
+    def teacher_id(self, id):
+        return '<h1>{} ({})</h1>'.format(id, type(id).__name__)
+        # return http.request.render('website_v18.teacher_data', {})
+
+    # @http.route('/teachers/<model("teacher.school"):teacher_id>/', auth='public', website=True)
+    # def teacher(self, teacher):
+    #     return http.request.render('webiste_v18.index2', {
+    #         'id': teacher
+    #     })
+
     @http.route('/academy/academy1/', auth='public', website=True)
     def index(self, **kw):
         Teachers = http.request.env['teacher.school'].sudo().search([])

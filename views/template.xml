@@ -19,7 +19,30 @@
         </t>
     </template>
 
+    <!-- <template id="index2">
+        <t t-call="website.layout">
+            <t t-set="title">Academy</t>
+            <div class="oe_structure">
+                <div class="container">
+                    <t t-foreach="id" t-as="teacher">
+                        <p>
+                            <a t-attf-href="/teachers/{{ slug(teacher_id) }}">
+                            <t t-esc="id.teacher_name"/></a>
+                        </p>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template> -->
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~ -->
+
+    <record id="menu_teacher" model="website.menu">
+        <field name="name">Teachers</field>
+        <field name="url">/academy/academy1</field>
+        <field name="parent_id" ref="website.main_menu"/>
+        <field name="sequence">1</field>
+    </record>
 
     <template id="teacher_data">
         <t t-call="website.layout">
@@ -27,9 +50,9 @@
             <div class="oe_structure">
                 <div class="container">
                     <div class="clearfix oe_login_buttons" style="margin:10px">
-                        <a href = "/myteacher" class="btn btn-primary pull-left">Create Teacher</a>
+                        <a href="/myteacher" class="btn btn-primary pull-left">Create Teacher</a>
                     </div>
-                    <table>
+                    <table class="table">
                         <tr>
                             <th> ID </th>
                             <th> Name </th>
@@ -37,45 +60,42 @@
                             <th> Gender </th>
                             <th> Address </th>
                             <th> Email </th>
-                            <th> Photo </th>
-                            <tr>
-                                <td>
-                                    <t t-foreach="id" t-as="teacher">
-                                        <p>
-                                            <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
-                                                <t t-esc="teacher.id"/>
-                                                <t t-esc='teacher.teacher_name'/>
-                                                <t t-esc='teacher.teacher_mobile'/>
-                                                <t t-esc='teacher.teacher_gender'/>
-                                                <t t-esc='teacher.teacher_address'/>
-                                                <t t-esc='teacher.teacher_email'/>
-                                                <t t-esc='teacher.teacher_photo'/>
-                                            </a>
-                                        </p>
-                                    </t>
-                                </td>
-                            </tr>
+                            <t t-foreach="id" t-as="teacher">
+                                <tr>
+                                    <td>
+                                        <b>
+                                            <t t-esc="teacher.id"/>
+                                        </b>
+                                    </td>
+                                    <td>
+                                        <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
+                                            <t t-esc='teacher.teacher_name'/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
+                                            <t t-esc='teacher.teacher_mobile'/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
+                                            <t t-esc='teacher.teacher_gender'/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
+                                            <t t-esc='teacher.teacher_address'/>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        <a t-att-href = "'/odoo/action-272/'+str(teacher.id)">
+                                            <t t-esc='teacher.teacher_email'/>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </t>
                         </tr>
                     </table>
-                    <!-- <t t-foreach="teacher_name" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_name'/></p>
-                        </t>
-                        <t t-foreach="teacher_mobile" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_mobile'/></p>
-                        </t>
-                        <t t-foreach="teacher_gender" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_gender'/></p>
-                        </t>
-                        <t t-foreach="teacher_address" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_address'/></p>
-                        </t>
-                        <t t-foreach="teacher_email" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_email'/></p>
-                        </t>
-                        <t t-foreach="teacher_photo" t-as="teacher">
-                            <p><t t-esc="teacher.id"/> - <t t-esc='teacher.teacher_photo'/></p>
-                        </t> -->
-
                 </div>
             </div>
         </t>

@@ -14,6 +14,12 @@
         'views/academy_view.xml',
         'views/template.xml'
     ],
+    "assets": {
+        "web.assets_frontend": [
+            "website_v18/static/src/js/owlcomp.js",
+            "website_v18/static/src/xml/owlcomps.xml",
+        ],
+    },
     'installable': True,
     'application': True,
     'license': 'LGPL-3',
