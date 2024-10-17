@@ -101,6 +101,87 @@
         </t>
     </template>
 
+    <template id="website_v18.portal_teacher_views" name="Teachers">
+    <t t-call="portal.portal_layout">
+        <t t-set="breadcrumbs_searchbar" t-value="True"/>
+        <t t-call="portal.portal_searchbar">
+            <t t-set="title">Teachers</t>
+        </t>
+        <t t-call="portal.portal_table">
+            <thead>
+                <tr class="active">
+                    <th class="text-left">Name</th>
+                    <th class="text-center">Mobile</th>
+                    <th class="text-center">Address</th>
+                    <th class="text-center">Email</th>
+                </tr>
+            </thead>
+            <t t-foreach="id" t-as="teacher">
+                <tr>
+                    <td class='text-left'>
+                        <span t-field="teacher.teacher_name"/>
+                    </td>
+                    <td class='text-center'>
+                        <span t-field="teacher.teacher_mobile"/>
+                    </td>
+                    <td class='text-center'>
+                        <span t-field="teacher.teacher_address"/>
+                    </td>
+                    <td class='text-left' style="padding-left:7rem">
+                        <span t-field="teacher.teacher_email"/>
+                    </td>
+                </tr>
+            </t>
+        </t>
+    </t>
+    </template>
+
+
+    <template
+        id="website_v18.portal_my_home_sale"
+        name="Portal My Home: project entries"
+        inherit_id="portal.portal_my_home"
+        priority="1"
+    >
+        <xpath expr="//div[hasclass('o_portal_docs')]" position="inside">
+            <h3 class="page-header">
+                <span class="fa fa-quote-left mr10" />
+                <a t-att-href="'/academy/academy1'">Teacher</a>
+            </h3>
+            <h3 class="page-header">
+                <span class="fa fa-first-order mr10" />
+                <a t-att-href="'/my/orders'">Sales Orders</a>
+            </h3>
+        </xpath>
+    </template>
+
+    <template
+        id="website_v18.my_home_page"
+        name="My Home Page"
+        inherit_id="portal.portal_my_home"
+    >
+        <xpath expr="//div[hasclass('o_portal_my_home')]" position="attributes">
+            <attribute name="class">o_portal_my_home sidebar-inner-wrapper
+            col-md-3
+        </attribute>
+        </xpath>
+        <xpath expr="//div[@id='portal_common_category']" position="replace">
+            <h3 class="page-header">
+                <span class="fa fa-address-card mr10" />
+                <a t-att-href="'/my/account'">Addresses</a>
+            </h3>
+            <h3 class="page-header">
+                <span class="fa fa-lock mr10" />
+                <a t-att-href="'/my/security'">Connection &amp; Security</a>
+            </h3>
+
+        </xpath>
+        <!--  <xpath expr="//div[hasclass('o_portal_my_home')]/h3" position="replace">
+            <h3 class="d-none">Your Documents</h3>
+        </xpath> -->
+    </template>
+
+
     <!-- ~~~~~~~~~~~~~~~~~~~~~ -->
 
     <template id="new_teacher_form_view" name="Teacher Data">
@@ -116,7 +197,8 @@
                             </div>
                             <div class="form-group" style="margin:20px">
                                 <label class="control-label" for="teacher_mobile">Enter mobile No:</label>
-                                <input type="integer" name="teacher_mobile" t-att-value="teacher_mobile" id="teacher_mobile" class="form-control"/>
+                                <input type="tel" pattern="['+']{1}[7-9]{1}[0-9]{9}" name="teacher_mobile"
+                                t-att-value="teacher_mobile" id="teacher_mobile" class="form-control"/>
                             </div>
                             <div class="form-group" style="margin:20px">
                                 <label class="control-label" for="teacher_gender">Select Gender:</label>
@@ -129,7 +211,7 @@
                             </div>
                             <div class="form-group" style="margin:20px">
                                 <label class="control-label" for="teacher_address">Enter Address:</label>
-                                <input type="char" name="teacher_address" t-att-value="teacher_address" id="teacher_address" class="form-control"/>
+                                <input type="text" name="teacher_address" t-att-value="teacher_address" id="teacher_address" class="form-control"/>
                             </div>
                             <div class="form-group" style="margin:20px">
                                 <label class="control-label" for="teacher_email">Enter Email:</label>
