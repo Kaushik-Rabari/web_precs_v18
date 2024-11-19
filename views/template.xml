@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="web_sale_variant_docs" inherit_id="website_sale.product" name="Website Sale Variant Documents" active="True">
+        <!-- <xpath expr="//t[@t-set='product_documents']" position="after">
+            <t t-set="product_variant" t-value="product.env['product.product'].browse(combination_info['product_id'])"/>
+            <t t-esc="product_variant.id"/>
+            
+            <span id="product_variant_id" data-product-id="t-esc='product_variant.id'">
+                <t t-esc="product_variant.id"/>
+            </span>
+        </xpath> -->
+        <xpath expr="//t[@t-foreach='product_documents']" position="replace">
+            <t t-foreach="product_documents" t-as="document_sudo">
+                <t t-set="attachment_sudo" t-value="document_sudo.ir_attachment_id"/>
+                <t t-set="target" t-value="attachment_sudo.type == 'url' and '_blank' or '_self'"/>
+                <t t-set="icon" t-value="attachment_sudo.type == 'url' and 'fa-link' or 'fa-download'"/>
+                <div class="document-item" t-att-data-variant-id="document_sudo.product_document_id.id" style="display: none;">
+                    <a t-att-href="'/shop/' + slug(product) + '/document/' + str(document_sudo.id)" t-att-target="target" t-att-variant_id="document_sudo.product_document_id.id">
+                        <i t-att-class="'fa ' + icon"/>
+                        <t t-out="attachment_sudo.name"/>
+                    </a>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

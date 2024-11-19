@@ -1,0 +1,13 @@
+<odoo>
+    <record id="prod_docs_inherited_form" model="ir.ui.view">
+        <field name="name">prod.docs.inherited.form</field>
+        <field name="model">product.document</field>
+        <field name="inherit_id" ref="product.product_document_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='type']" position="after">
+                <!-- <field name="product_document_id" string="Product Variant"/> -->
+                <field name="product_document_id" string="Product Variant"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
