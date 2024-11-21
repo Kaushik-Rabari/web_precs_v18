@@ -1,66 +1,31 @@
-/** @odoo-module */
+/**@odoo-module */
 
 import publicWidget from '@web/legacy/js/public/public_widget';
-import { VariantMixin } from '@website_sale/variant_mixin';
-import { _t } from "@web/core/l10n/translation";
-import { patch } from '@web/core/utils/patch';
-import { rpc } from "@web/core/network/rpc";
 
-
-publicWidget.registry.InheritedVariantMixin = WebsiteSale.extend(VariantMixin, {
-    events: {
-        'change .css_attribute_color input': '_onChangeColorAttribute',
-        'click .o_variant_pills': '_onChangePillsAttribute',
-        'change [data-attribute_exclusions]': 'onChangeVariant'
+publicWidget.registry.WebsiteSale.include({
+    /**
+     * overrided the default _onChangeCombination() to customize as per requirements
+     * @override
+     */
+    _onChangeCombination(ev, $parent, combination) {
+        const res = this._super.apply(this, arguments);
+        const productId = combination.product_id;
+        $('#product_variant_id').text(productId);
+        $('#product_variant_id').attr('data-product-id', productId);
+        $('.document-item').each(function () {
+            const documentVariantId = $(this).data('variant-id');
+            if (documentVariantId === productId) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+        console.log("\ninside custom _onChangeCombintaion()")
+        console.log("_onChangeCombination().res>>>>>>>", res)
+        console.log("_onChangeCombination().$parent>>>>>>>", $parent)
+        console.log("_onChangeCombination().combination[product_id]>>>>>>>", combination.product_id,"\n")
+        console.log("_onChangeCombination().combination[product_template_id]>>>>>>>", combination.product_template_id,"\n")
+        console.log("_onChangeCombination().combination>>>>>>>", combination,"\n")
+        return res;
     },
-
-
 })
-
-export default publicWidget.registry.InheritedVariantMixin;
-
-
-_getCombinationInfo: function (ev) {
-    if ($(ev.target).hasClass('variant_custom_value')) {
-        return Promise.resolve();
-    }
-
-    const $parent = $(ev.target).closest('.js_product');
-    if(!$parent.length){
-        return Promise.resolve();
-    }
-    const combination = this.getSelectedVariantValues($parent);
-
-    return rpc('/website_sale/get_combination_info', {
-        'product_template_id': parseInt($parent.find('.product_template_id').val()),
-        'product_id': this._getProductId($parent),
-        'combination': combination,
-        'add_qty': parseInt($parent.find('input[name="add_qty"]').val()),
-        'parent_combination': [],
-        'context': this.context,
-        ...this._getOptionalCombinationInfoParam($parent),
-    }).then((combinationData) => {
-        if (this._shouldIgnoreRpcResult()) {
-            return;
-        }
-
-        // console.log("CombinationData.ProductId>>>>>>>>",combinationData.product_id)
-        // console.log("COMBINATIONDATA>>>>>>>>",combinationData)
-        
-        // const productId = combinationData.product_id;
-        // $('#product_variant_id').text(productId);
-        // $('#product_variant_id').attr('data-product-id', productId);
-
-        // $('.document-item').each(function () {
-        //     const documentVariantId = $(this).data('variant-id');
-        //     if (documentVariantId === productId) {
-        //         $(this).show();
-        //     } else {
-        //         $(this).hide();
-        //     }
-        // });
-
-        this._onChangeCombination(ev, $parent, combinationData);
-        this._checkExclusions($parent, combination, combinationData.parent_exclusions);
-    });
-},

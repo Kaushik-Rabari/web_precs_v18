@@ -5,8 +5,9 @@
         <field name="inherit_id" ref="product.product_document_form"/>
         <field name="arch" type="xml">
             <xpath expr="//field[@name='type']" position="after">
-                <!-- <field name="product_document_id" string="Product Variant"/> -->
-                <field name="product_document_id" string="Product Variant"/>
+                <field name="product_document_id"/>
+                <field name="visible_all_variant"/>
+                <field name="product_template_id" invisible="True"/>
             </xpath>
         </field>
     </record>

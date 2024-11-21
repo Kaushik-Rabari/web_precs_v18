@@ -5,10 +5,10 @@
     'category': 'Website',
     'sequence': -1,
     'summary': """
-        this module is use for website sale variant document
+        this module is use for web sale variant document
     """,
     'description': """
-        this module is use for website sale variant document        
+        this module is use for website sale variant document
     """,
     'depends': ['website','website_sale','sale_management'],
     'installable': True,
@@ -17,7 +17,6 @@
     'data': [
         'views/template.xml',
         'views/product_product_inherited.xml',
-        # 'views/product_template_inherited.xml',
     ],
     'assets':{
         "web.assets_frontend": [
