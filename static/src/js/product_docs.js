@@ -20,12 +20,6 @@ publicWidget.registry.WebsiteSale.include({
                 $(this).hide();
             }
         });
-        console.log("\ninside custom _onChangeCombintaion()")
-        console.log("_onChangeCombination().res>>>>>>>", res)
-        console.log("_onChangeCombination().$parent>>>>>>>", $parent)
-        console.log("_onChangeCombination().combination[product_id]>>>>>>>", combination.product_id,"\n")
-        console.log("_onChangeCombination().combination[product_template_id]>>>>>>>", combination.product_template_id,"\n")
-        console.log("_onChangeCombination().combination>>>>>>>", combination,"\n")
         return res;
     },
 })
